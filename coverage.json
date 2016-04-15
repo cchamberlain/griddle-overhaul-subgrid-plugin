@@ -1,0 +1,37 @@
+{
+  "coverage": "0%",
+  "expectCount": 6,
+  "actualCount": 0,
+  "files": {
+    "lib/constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    },
+    "lib/reducer.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        10,
+        138,
+        155
+      ]
+    },
+    "lib/actions.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "lib/helpers.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    }
+  }
+}

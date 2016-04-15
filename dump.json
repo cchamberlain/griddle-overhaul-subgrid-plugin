@@ -1,0 +1,1683 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/actions.js",
+    "memberof": null,
+    "longname": "lib/actions.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import * as types from './constants'\r\n\r\nexport const expandRow = griddleKey => ({ type: types.GRIDDLE_ROW_TOGGLED, griddleKey })\r\n"
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "expandRow",
+    "memberof": "lib/actions.js",
+    "longname": "lib/actions.js~expandRow",
+    "access": null,
+    "export": true,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/actions.js",
+    "importStyle": "{expandRow}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/components/column.js",
+    "memberof": null,
+    "longname": "lib/components/column.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\r\n\r\nimport React, { Component } from 'react';\r\n\r\nexport default ColumnComponent => class extends Component {\r\n  render() {\r\n    const columnStyle = Object.assign({}, this.props.styles.inlineStyles.column, { padding: (this.props.rowData.__metadata.depth || 0) * 5 + 5 });\r\n    const inlineStyles = Object.assign({}, this.props.styles.inlineStyles, { column: columnStyle });\r\n    const styles = Object.assign({}, this.props.styles, { inlineStyles });\r\n\r\n    return <ColumnComponent {...this.props} styles={styles} onClick={this._expandRow} />\r\n  }\r\n\r\n  _expandRow = () => {\r\n    this.props.events.expandRow(this.props.rowData.__metadata.griddleKey)\r\n  }\r\n};\r\n"
+  },
+  {
+    "__docId__": 3,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/components/index.js",
+    "memberof": null,
+    "longname": "lib/components/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Column from './column';\r\nimport Row from './row';\r\nimport TableBody from './table-body';\r\nimport TableHeading from './table-heading';\r\n\r\nexport { Column as Column };\r\nexport { Row as Row };\r\nexport { TableBody as TableBody };\r\nexport { TableHeading as TableHeading };\r\n"
+  },
+  {
+    "__docId__": 4,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/components/row.js",
+    "memberof": null,
+    "longname": "lib/components/row.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import React, { Component, PropTypes } from 'react';\r\n\r\nfunction getExpandColumn(expanded, hasChildren, icons) {\r\n  if(!hasChildren) {\r\n    return { expandColumn: '' }\r\n  }\r\n\r\n  return {\r\n    expandColumn: expanded ?\r\n      icons.parentRowExpanded :\r\n      icons.parentRowCollapsed\r\n    };\r\n}\r\n\r\nexport default RowComponent => class extends Component {\r\n  static PropTypes = {\r\n    components: PropTypes.object.isRequired,\r\n    columnProperties: PropTypes.object.isRequired,\r\n    rowData: PropTypes.object.isRequired\r\n  }\r\n\r\n  render() {\r\n    const expandColumn = getExpandColumn(this.props.rowData.__metadata.expanded,\r\n      this.props.rowData.__metadata.hasChildren,\r\n      this.props.styles.icons);\r\n    //TODO: this should probably have a css class associated with it.\r\n    const expandColumnProperties = {expandColumn:\r\n      {\r\n        id: \"expandColumn\",\r\n        displayName: \"\"\r\n      }\r\n    };\r\n\r\n    const rowData = Object.assign({}, expandColumn, this.props.rowData);\r\n    const columnProperties = Object.assign({}, expandColumnProperties ,this.props.columnProperties)\r\n\r\n    const depth = this.props.rowData.__metadata.depth;\r\n    return <RowComponent {...this.props} depth={depth || 0} rowData={rowData} columnProperties={columnProperties} />\r\n  }\r\n\r\n};\r\n"
+  },
+  {
+    "__docId__": 5,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "getExpandColumn",
+    "memberof": "lib/components/row.js",
+    "longname": "lib/components/row.js~getExpandColumn",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/components/row.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "params": [
+      {
+        "name": "expanded",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "hasChildren",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "icons",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 6,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/components/table-body.js",
+    "memberof": null,
+    "longname": "lib/components/table-body.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "'use strict';\r\n\r\nimport React from 'react';\r\n\r\nclass TableBody extends React.Component {\r\n  constructor(props, context) {\r\n    super(props, context);\r\n  }\r\n\r\n  shouldComponentUpdate(nextProps) {\r\n    return this.props.data !== nextProps.data;\r\n  }\r\n\r\n\r\n  getRows(rowData) {\r\n    return rowData\r\n      .filter(data => data.visible === undefined || data.visible === true)\r\n      .map((data, index) =>\r\n        this.getRow(data, index)\r\n      );\r\n  }\r\n\r\n  getRow(data, index) {\r\n    let rows = [<this.props.components.Row rowData={data}\r\n      components={this.props.components}\r\n      events={this.props.events}\r\n      rowIndex={index}\r\n      rowProperties={this.props.renderProperties.rowProperties}\r\n      tableProperties={this.props.tableProperties}\r\n      ignoredColumns={this.props.renderProperties.ignoredColumns}\r\n      settings={this.props.settings}\r\n      styles={this.props.styles}\r\n      columnProperties={this.props.renderProperties.columnProperties} />\r\n    ];\r\n\r\n    if(data.children && data.children.length > 0 && data.__metadata.expanded) {\r\n      rows.push(this.getRows(data.children));\r\n    }\r\n\r\n    return rows;\r\n  }\r\n\r\n\r\n  render() {\r\n    var rows = this.getRows(this.props.data);\r\n    return (\r\n      <tbody>\r\n        {rows}\r\n      </tbody>\r\n    );\r\n  }\r\n}\r\n\r\n//Plugins expect a function\r\nexport default Component => TableBody;\r\n"
+  },
+  {
+    "__docId__": 7,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "TableBody",
+    "memberof": "lib/components/table-body.js",
+    "longname": "lib/components/table-body.js~TableBody",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/components/table-body.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "react~React.Component"
+    ]
+  },
+  {
+    "__docId__": 8,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "lib/components/table-body.js~TableBody",
+    "longname": "lib/components/table-body.js~TableBody#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "params": [
+      {
+        "name": "props",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "context",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 9,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "shouldComponentUpdate",
+    "memberof": "lib/components/table-body.js~TableBody",
+    "longname": "lib/components/table-body.js~TableBody#shouldComponentUpdate",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "nextProps",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 10,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "getRows",
+    "memberof": "lib/components/table-body.js~TableBody",
+    "longname": "lib/components/table-body.js~TableBody#getRows",
+    "access": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rowData",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 11,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "getRow",
+    "memberof": "lib/components/table-body.js~TableBody",
+    "longname": "lib/components/table-body.js~TableBody#getRow",
+    "access": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "index",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 12,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "render",
+    "memberof": "lib/components/table-body.js~TableBody",
+    "longname": "lib/components/table-body.js~TableBody#render",
+    "access": null,
+    "description": null,
+    "lineNumber": 44,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 13,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/components/table-heading.js",
+    "memberof": null,
+    "longname": "lib/components/table-heading.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import React, { Component, PropTypes } from 'react';\r\n\r\nexport default TableHeading => class extends Component {\r\n  static PropTypes = {\r\n    renderProperties: PropTypes.object.isRequired,\r\n    columns: PropTypes.array.isRequired\r\n  }\r\n\r\n  render() {\r\n    const expandColumnProperties = {\r\n      expandColumn: {\r\n        id: 'expandColumn',\r\n      }\r\n    }\r\n\r\n    const columns = ['expandColumn', ...this.props.columns]\r\n    const columnTitles = Object.assign({}, {'expandColumn' : ' '}, this.props.columnTitles);\r\n    const columnProperties = Object.assign({}, expandColumnProperties ,this.props.renderProperties.columnProperties)\r\n    const renderProperties = Object.assign({}, this.props.renderProperties);\r\n    renderProperties.columnProperties = columnProperties;\r\n\r\n    return <TableHeading {...this.props} columns={columns} renderProperties={renderProperties} columnTitles={columnTitles} />\r\n  }\r\n}"
+  },
+  {
+    "__docId__": 14,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/constants.js",
+    "memberof": null,
+    "longname": "lib/constants.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "export const GRIDDLE_ROW_TOGGLED = 'GRIDDLE_ROW_TOGGLED'\r\n"
+  },
+  {
+    "__docId__": 15,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "GRIDDLE_ROW_TOGGLED",
+    "memberof": "lib/constants.js",
+    "longname": "lib/constants.js~GRIDDLE_ROW_TOGGLED",
+    "access": null,
+    "export": true,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/constants.js",
+    "importStyle": "{GRIDDLE_ROW_TOGGLED}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 16,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/helpers.js",
+    "memberof": null,
+    "longname": "lib/helpers.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "export function getSortedColumns(data, columns, childrenPropertyName) {\r\n  return data.map((row, index) => {\r\n    let children = row.get(childrenPropertyName || 'children')\r\n\r\n    if(children && children.size > 0)\r\n      children = getSortedColumns(row.get('children'), columns)\r\n\r\n    return row\r\n      .sortBy((val, key) => columns.indexOf(key))\r\n      .set('children', children)\r\n  })\r\n}\r\n"
+  },
+  {
+    "__docId__": 17,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "getSortedColumns",
+    "memberof": "lib/helpers.js",
+    "longname": "lib/helpers.js~getSortedColumns",
+    "access": null,
+    "export": true,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/helpers.js",
+    "importStyle": "{getSortedColumns}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "columns",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 18,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/index.js",
+    "memberof": null,
+    "longname": "lib/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import * as constants from './constants'\r\nimport * as actions from './actions'\r\nimport * as helpers from './helpers'\r\nimport * as reducers from './reducer'\r\nimport { default as initialState } from './initial-state'\r\nimport * as components from './components/'\r\n\r\nexport default  { name: 'GriddleSubgrid'\r\n                , actions\r\n                , constants\r\n                , helpers\r\n                , states: initialState\r\n                , reducers\r\n                , components\r\n                }\r\n"
+  },
+  {
+    "__docId__": 19,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/initial-state.js",
+    "memberof": null,
+    "longname": "lib/initial-state.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Immutable from 'immutable'\r\n\r\nexport default Immutable.fromJS(\r\n  { currentPosition:  { xScrollChangePosition: 0\r\n                      , yScrollChangePosition: 0\r\n                      , renderedStartDisplayIndex: 0\r\n                      , renderedEndDisplayIndex: 20\r\n                      , visibleDataLength: 20\r\n                      , tableHeight: 500\r\n                      , tableWidth: 300\r\n                      , rowHeight: 20\r\n                      , defaultColumnWidth: 80\r\n                      , infiniteScrollLoadTreshold: 50\r\n                      }\r\n  , renderedData: []\r\n  }\r\n)\r\n"
+  },
+  {
+    "__docId__": 20,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "lib/reducer.js",
+    "memberof": null,
+    "longname": "lib/reducer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Immutable from 'immutable'\r\nimport MAX_SAFE_INTEGER from 'max-safe-integer'\r\nimport extend from 'lodash.assign'\r\n\r\nimport { GriddleHelpers } from 'griddle-core'\r\nconst { data } = GriddleHelpers\r\nconst { getVisibleDataColumns } = data\r\n\r\n\r\nexport default function createReducer({ getDataColumns, getSortedColumns }) {\r\n  const configured =  { AFTER_REDUCE: createAFTER_REDUCE({ getDataColumns, getSortedColumns })\r\n                      , GRIDDLE_ROW_TOGGLED: createGRIDDLE_ROW_TOGGLED({ getDataColumns })\r\n                      , GRIDDLE_LOADED_DATA_AFTER: createGRIDDLE_LOADED_DATA_AFTER({ getDataColumns })\r\n                      }\r\n  return (state, action) => {\r\n    return  { AFTER_REDUCE: configured.AFTER_REDUCE(state, action)\r\n            , GRIDDLE_ROW_TOGGLED: configured.GRIDDLE_ROW_TOGGLED(state, action)\r\n            , GRIDDLE_LOADED_DATA_AFTER: configured.GRIDDLE_LOADED_DATA_AFTER(state, action)\r\n            }\r\n  }\r\n}\r\n\r\nconst createAFTER_REDUCE = ({ getDataColumns, getSortedColumns }) => (state, action) => {\r\n  const columns = getDataColumns(state, data)\r\n  const properties = getProperties(columns)\r\n  const data = transform(state.get('visibleData'), state, properties.childrenPropertyName)\r\n  columns.push(properties.childrenPropertyName)\r\n  return state\r\n    .set('visibleData', sortChildren(getSortedColumns(getVisibleChildData(data, columns), columns), state, { getDataColumns, getSortedColumns }, properties.childrenPropertyName), columns)\r\n}\r\n\r\nconst createGRIDDLE_ROW_TOGGLED = ({ getDataColumns }) => (state, action) => {\r\n  const { griddleKey } = action\r\n  const columns = getDataColumns(state, state.get('data'))\r\n  const properties = getProperties(columns)\r\n\r\n  return state.set('data', toggleExpanded(state.get('data'), griddleKey, properties.childrenPropertyName))\r\n}\r\n\r\nconst createGRIDDLE_LOADED_DATA_AFTER = ({ getDataColumns }) => (state, action) => {\r\n  const data = state.get('data')\r\n  const columns = getDataColumns(state, data)\r\n  const newData = setRowProperties(data, getProperties(columns))\r\n  return state.set('data', newData)\r\n}\r\n\r\n\r\n/*\r\nOVERALL TODO:\r\n  fix column order\r\n*/\r\nconst hasChildren = (record, childrenPropertyName = 'children') => record.get(childrenPropertyName) && record.get(childrenPropertyName).size > 0\r\n\r\nfunction transform(data, state, childrenPropertyName = 'children') {\r\n  let filter = state.get('filter')\r\n  return filter === '' ? data : filterChildren(data, state.get('filter'), childrenPropertyName)\r\n}\r\n\r\nfunction sortChildren(data, state, helpers, childrenPropertyName = 'children') {\r\n  const sortColumns = state.getIn(['sortProperties', 'sortColumns'])\r\n  const sortAscending = state.getIn(['sortProperties', 'sortAscending'])\r\n  const getSortedRows = (data, sort = false) => {\r\n    const mappedData = data.map((row, index) => {\r\n      return hasChildren(row) && row.getIn(['__metadata', 'expanded']) === true ?\r\n        row.set('children', getSortedRows(row.get('children'), true)) :\r\n        row\r\n    })\r\n    return sort ? helpers.getSortedData(mappedData, sortColumns, sortAscending) : mappedData\r\n  }\r\n  return !sortColumns || !helpers ? data : getSortedRows(data)\r\n}\r\n\r\n\r\n\r\n//TODO: Make this more efficient where it'll stop when it finds the record it's looking for\r\nfunction toggleExpanded(data, griddleKey, childrenPropertyName = 'children') {\r\n  return data.map(row => {\r\n    let children = row.get(childrenPropertyName)\r\n\r\n    if(children && children.size > 0)\r\n      children = toggleExpanded(children, griddleKey)\r\n\r\n    return row\r\n      .set(childrenPropertyName, children)\r\n      /* Sets the toggle status of the row either to what it is currently or the opposite if this is the one to toggle */\r\n      .set('expanded', row.get('griddleKey') === griddleKey ?\r\n        !row.get('expanded') :\r\n        row.get('expanded'))\r\n  })\r\n}\r\n\r\n\r\n//TODO: This is almost the same as the filterChildrenData method but not applying the filter method :/\r\nfunction filterChildren(rows, filter, childrenPropertyName = 'children') {\r\n  return rows.map(row => {\r\n    let children = row.get(childrenPropertyName)\r\n\r\n    if(children && children.size > 0) {\r\n      children = filterChildrenData(row.get(childrenPropertyName), filter, childrenPropertyName)\r\n    }\r\n\r\n    return row\r\n      .set(childrenPropertyName, children)\r\n  })\r\n}\r\n\r\nfunction filterChildrenData(rows, filter, childrenPropertyName = 'children') {\r\n  const values = rows.filter(row => {\r\n    let children = row.get(childrenPropertyName)\r\n\r\n    if(children && children.size > 0)\r\n      children = filterChildrenData(row.get(childrenPropertyName), filter, childrenPropertyName)\r\n\r\n    const hasMatch = (children && children.length > 0) || (Object.keys(row.toJSON())\r\n      .some(key => {\r\n        return row.get(key) && row.get(key).toString().toLowerCase().indexOf(filter.toLowerCase()) > -1\r\n      }))\r\n\r\n    return hasMatch\r\n  })\r\n  return values\r\n}\r\n\r\n\r\n\r\nfunction getProperties(columns) {\r\n  return extend({ childrenPropertyName: 'children'\r\n                , columns: []\r\n                }, columns)\r\n}\r\n\r\nconst hasMetadata = data => {\r\n  const metadata = data.get(0).get('__metadata')\r\n  return metadata && metadata.size > 0\r\n}\r\n\r\n//TODO: Refactor this logic -- This is probably way more expensive than it needs to be\r\nexport function getVisibleChildData(data, columns, childrenPropertyName = 'children') {\r\n  if(data.size === 0) { return data }\r\n  //get the data and make sure metadata is applied\r\n  const dataWithMetadata = hasMetadata(data) ? data : getVisibleDataColumns(data, columns)\r\n\r\n  //go through each visible child row and set it to use the correct column settings\r\n  return dataWithMetadata.map((row, index) => {\r\n    let children = row.get(childrenPropertyName)\r\n\r\n    if(children && children.size > 0)\r\n      children = getVisibleChildData(children, columns, childrenPropertyName)\r\n\r\n    return row\r\n      .set('children', children)\r\n  })\r\n}\r\n\r\nexport function setRowProperties(data, properties, depth = 0, parentId = null) {\r\n  let key = 0\r\n  const getKey = (() => key+= 1)\r\n\r\n  return data.map((row, index) => {\r\n    let children = row.get(properties.childrenPropertyName)\r\n    let currentKey = parentId !== null ? `${parentId}.${getKey()}` : `${row.get('griddleKey')}`\r\n\r\n    if(children && children.size > 0)\r\n      children = setRowProperties(children, { childrenPropertyName: properties.childrenPropertyName, columns: properties.columns }, depth + 1, currentKey)\r\n\r\n    return row\r\n      .sortBy((val, key) => properties.columns.indexOf(key))\r\n      .set('children', children)\r\n      .set('depth', depth)\r\n      .set('griddleKey', currentKey)\r\n      .set('parentId', parentId)\r\n      .set('expanded', false)\r\n      .set('hasChildren', children && children.size > 0)\r\n  })\r\n}\r\n"
+  },
+  {
+    "__docId__": 21,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "data",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~data",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "getVisibleDataColumns",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~getVisibleDataColumns",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "createReducer",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~createReducer",
+    "access": null,
+    "export": true,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": "createReducer",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"getDataColumns\": *, \"getSortedColumns\": *}"
+        ],
+        "defaultRaw": {
+          "getDataColumns": null,
+          "getSortedColumns": null
+        },
+        "defaultValue": "{\"getDataColumns\":null,\"getSortedColumns\":null}"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 24,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "createAFTER_REDUCE",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~createAFTER_REDUCE",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 25,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "createGRIDDLE_ROW_TOGGLED",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~createGRIDDLE_ROW_TOGGLED",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 26,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "createGRIDDLE_LOADED_DATA_AFTER",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~createGRIDDLE_LOADED_DATA_AFTER",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "hasChildren",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~hasChildren",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 52,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "transform",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~transform",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 54,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "children",
+        "defaultValue": "children"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 29,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "sortChildren",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~sortChildren",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 59,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "state",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "helpers",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "children",
+        "defaultValue": "children"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 30,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "toggleExpanded",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~toggleExpanded",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 76,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "griddleKey",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "children",
+        "defaultValue": "children"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 31,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "filterChildren",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~filterChildren",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 94,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rows",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "filter",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "children",
+        "defaultValue": "children"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 32,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "filterChildrenData",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~filterChildrenData",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 107,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rows",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "filter",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "children",
+        "defaultValue": "children"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 33,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "getProperties",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~getProperties",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 126,
+    "undocument": true,
+    "params": [
+      {
+        "name": "columns",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 34,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "hasMetadata",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~hasMetadata",
+    "access": null,
+    "export": false,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 132,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 35,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "getVisibleChildData",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~getVisibleChildData",
+    "access": null,
+    "export": true,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": "{getVisibleChildData}",
+    "description": null,
+    "lineNumber": 138,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "columns",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "childrenPropertyName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "children",
+        "defaultValue": "children"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 36,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "setRowProperties",
+    "memberof": "lib/reducer.js",
+    "longname": "lib/reducer.js~setRowProperties",
+    "access": null,
+    "export": true,
+    "importPath": "griddle-overhaul-subgrid-plugin/lib/reducer.js",
+    "importStyle": "{setRowProperties}",
+    "description": null,
+    "lineNumber": 155,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "properties",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "depth",
+        "optional": true,
+        "types": [
+          "number"
+        ],
+        "defaultRaw": 0,
+        "defaultValue": "0"
+      },
+      {
+        "name": "parentId",
+        "optional": true,
+        "types": [
+          "*"
+        ],
+        "defaultRaw": null,
+        "defaultValue": "null"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 49,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  }
+]

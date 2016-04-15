@@ -1,0 +1,342 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 130,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 4,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 36,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 36
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportNamespaceSpecifier",
+          "start": 7,
+          "end": 17,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 17
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 12,
+            "end": 17,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 12
+              },
+              "end": {
+                "line": 1,
+                "column": 17
+              }
+            },
+            "name": "types"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 23,
+        "end": 36,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 23
+          },
+          "end": {
+            "line": 1,
+            "column": 36
+          }
+        },
+        "value": "./constants",
+        "rawValue": "./constants",
+        "raw": "'./constants'"
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 40,
+      "end": 128,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 88
+        }
+      },
+      "declaration": {
+        "type": "VariableDeclaration",
+        "start": 47,
+        "end": 128,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 7
+          },
+          "end": {
+            "line": 3,
+            "column": 88
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 53,
+            "end": 128,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 13
+              },
+              "end": {
+                "line": 3,
+                "column": 88
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 53,
+              "end": 62,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 13
+                },
+                "end": {
+                  "line": 3,
+                  "column": 22
+                }
+              },
+              "name": "expandRow"
+            },
+            "init": {
+              "type": "ArrowFunctionExpression",
+              "start": 65,
+              "end": 128,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 25
+                },
+                "end": {
+                  "line": 3,
+                  "column": 88
+                }
+              },
+              "id": null,
+              "generator": false,
+              "expression": true,
+              "async": false,
+              "params": [
+                {
+                  "type": "Identifier",
+                  "start": 65,
+                  "end": 75,
+                  "loc": {
+                    "start": {
+                      "line": 3,
+                      "column": 25
+                    },
+                    "end": {
+                      "line": 3,
+                      "column": 35
+                    }
+                  },
+                  "name": "griddleKey"
+                }
+              ],
+              "body": {
+                "type": "ObjectExpression",
+                "start": 80,
+                "end": 127,
+                "loc": {
+                  "start": {
+                    "line": 3,
+                    "column": 40
+                  },
+                  "end": {
+                    "line": 3,
+                    "column": 87
+                  }
+                },
+                "properties": [
+                  {
+                    "type": "Property",
+                    "start": 82,
+                    "end": 113,
+                    "loc": {
+                      "start": {
+                        "line": 3,
+                        "column": 42
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 73
+                      }
+                    },
+                    "method": false,
+                    "shorthand": false,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 82,
+                      "end": 86,
+                      "loc": {
+                        "start": {
+                          "line": 3,
+                          "column": 42
+                        },
+                        "end": {
+                          "line": 3,
+                          "column": 46
+                        }
+                      },
+                      "name": "type"
+                    },
+                    "value": {
+                      "type": "MemberExpression",
+                      "start": 88,
+                      "end": 113,
+                      "loc": {
+                        "start": {
+                          "line": 3,
+                          "column": 48
+                        },
+                        "end": {
+                          "line": 3,
+                          "column": 73
+                        }
+                      },
+                      "object": {
+                        "type": "Identifier",
+                        "start": 88,
+                        "end": 93,
+                        "loc": {
+                          "start": {
+                            "line": 3,
+                            "column": 48
+                          },
+                          "end": {
+                            "line": 3,
+                            "column": 53
+                          }
+                        },
+                        "name": "types"
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "start": 94,
+                        "end": 113,
+                        "loc": {
+                          "start": {
+                            "line": 3,
+                            "column": 54
+                          },
+                          "end": {
+                            "line": 3,
+                            "column": 73
+                          }
+                        },
+                        "name": "GRIDDLE_ROW_TOGGLED"
+                      },
+                      "computed": false
+                    },
+                    "kind": "init"
+                  },
+                  {
+                    "type": "Property",
+                    "start": 115,
+                    "end": 125,
+                    "loc": {
+                      "start": {
+                        "line": 3,
+                        "column": 75
+                      },
+                      "end": {
+                        "line": 3,
+                        "column": 85
+                      }
+                    },
+                    "method": false,
+                    "shorthand": true,
+                    "computed": false,
+                    "key": {
+                      "type": "Identifier",
+                      "start": 115,
+                      "end": 125,
+                      "loc": {
+                        "start": {
+                          "line": 3,
+                          "column": 75
+                        },
+                        "end": {
+                          "line": 3,
+                          "column": 85
+                        }
+                      },
+                      "name": "griddleKey"
+                    },
+                    "kind": "init",
+                    "value": {
+                      "type": "Identifier",
+                      "start": 115,
+                      "end": 125,
+                      "loc": {
+                        "start": {
+                          "line": 3,
+                          "column": 75
+                        },
+                        "end": {
+                          "line": 3,
+                          "column": 85
+                        }
+                      },
+                      "name": "griddleKey"
+                    }
+                  }
+                ],
+                "parenthesizedExpression": true
+              }
+            }
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 58,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 2,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 0,
+      "end": 56,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 56
+        }
+      },
+      "declaration": {
+        "type": "VariableDeclaration",
+        "start": 7,
+        "end": 56,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 7
+          },
+          "end": {
+            "line": 1,
+            "column": 56
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "start": 13,
+            "end": 56,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 13
+              },
+              "end": {
+                "line": 1,
+                "column": 56
+              }
+            },
+            "id": {
+              "type": "Identifier",
+              "start": 13,
+              "end": 32,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 13
+                },
+                "end": {
+                  "line": 1,
+                  "column": 32
+                }
+              },
+              "name": "GRIDDLE_ROW_TOGGLED"
+            },
+            "init": {
+              "type": "Literal",
+              "start": 35,
+              "end": 56,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 35
+                },
+                "end": {
+                  "line": 1,
+                  "column": 56
+                }
+              },
+              "value": "GRIDDLE_ROW_TOGGLED",
+              "rawValue": "GRIDDLE_ROW_TOGGLED",
+              "raw": "'GRIDDLE_ROW_TOGGLED'"
+            }
+          }
+        ],
+        "kind": "const",
+        "leadingComments": [],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null
+    }
+  ]
+}
