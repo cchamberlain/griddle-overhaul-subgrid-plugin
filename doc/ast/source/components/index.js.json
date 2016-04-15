@@ -1,0 +1,550 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 276,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 10,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 30,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 30
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 7,
+          "end": 13,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 13
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 7,
+            "end": 13,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 13
+              }
+            },
+            "name": "Column"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 19,
+        "end": 29,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 19
+          },
+          "end": {
+            "line": 1,
+            "column": 29
+          }
+        },
+        "value": "./column",
+        "rawValue": "./column",
+        "raw": "'./column'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 32,
+      "end": 56,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 24
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 39,
+          "end": 42,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 10
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 39,
+            "end": 42,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 10
+              }
+            },
+            "name": "Row"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 48,
+        "end": 55,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 16
+          },
+          "end": {
+            "line": 2,
+            "column": 23
+          }
+        },
+        "value": "./row",
+        "rawValue": "./row",
+        "raw": "'./row'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 58,
+      "end": 95,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 37
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 65,
+          "end": 74,
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 16
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 65,
+            "end": 74,
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 16
+              }
+            },
+            "name": "TableBody"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 80,
+        "end": 94,
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 22
+          },
+          "end": {
+            "line": 3,
+            "column": 36
+          }
+        },
+        "value": "./table-body",
+        "rawValue": "./table-body",
+        "raw": "'./table-body'"
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "start": 97,
+      "end": 140,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 43
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "start": 104,
+          "end": 116,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 7
+            },
+            "end": {
+              "line": 4,
+              "column": 19
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 104,
+            "end": 116,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 7
+              },
+              "end": {
+                "line": 4,
+                "column": 19
+              }
+            },
+            "name": "TableHeading"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 122,
+        "end": 139,
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 25
+          },
+          "end": {
+            "line": 4,
+            "column": 42
+          }
+        },
+        "value": "./table-heading",
+        "rawValue": "./table-heading",
+        "raw": "'./table-heading'"
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 144,
+      "end": 172,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 28
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 153,
+          "end": 169,
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 9
+            },
+            "end": {
+              "line": 6,
+              "column": 25
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 153,
+            "end": 159,
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 9
+              },
+              "end": {
+                "line": 6,
+                "column": 15
+              }
+            },
+            "name": "Column"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 163,
+            "end": 169,
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 19
+              },
+              "end": {
+                "line": 6,
+                "column": 25
+              }
+            },
+            "name": "Column"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 174,
+      "end": 196,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 22
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 183,
+          "end": 193,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 9
+            },
+            "end": {
+              "line": 7,
+              "column": 19
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 183,
+            "end": 186,
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 9
+              },
+              "end": {
+                "line": 7,
+                "column": 12
+              }
+            },
+            "name": "Row"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 190,
+            "end": 193,
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 16
+              },
+              "end": {
+                "line": 7,
+                "column": 19
+              }
+            },
+            "name": "Row"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 198,
+      "end": 232,
+      "loc": {
+        "start": {
+          "line": 8,
+          "column": 0
+        },
+        "end": {
+          "line": 8,
+          "column": 34
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 207,
+          "end": 229,
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 9
+            },
+            "end": {
+              "line": 8,
+              "column": 31
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 207,
+            "end": 216,
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 9
+              },
+              "end": {
+                "line": 8,
+                "column": 18
+              }
+            },
+            "name": "TableBody"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 220,
+            "end": 229,
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 22
+              },
+              "end": {
+                "line": 8,
+                "column": 31
+              }
+            },
+            "name": "TableBody"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 234,
+      "end": 274,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 40
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 243,
+          "end": 271,
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 9
+            },
+            "end": {
+              "line": 9,
+              "column": 37
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 243,
+            "end": 255,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 9
+              },
+              "end": {
+                "line": 9,
+                "column": 21
+              }
+            },
+            "name": "TableHeading"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 259,
+            "end": 271,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 25
+              },
+              "end": {
+                "line": 9,
+                "column": 37
+              }
+            },
+            "name": "TableHeading"
+          }
+        }
+      ],
+      "source": null
+    }
+  ]
+}
