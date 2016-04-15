@@ -1,6 +1,6 @@
 {
   "name": "griddle-overhaul-subgrid-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A plugin for displaying subgrids.",
   "main": "lib/index.js",
   "scripts": {
@@ -15,8 +15,6 @@
     "prerelease-doc": "npm run doc",
     "release-doc": "git subtree push --prefix doc origin gh-pages",
     "postrelease-doc": "git commit -am \"doc-release\" && git push --follow-tags",
-
-
     "test": "karma start --browsers PhantomJS",
     "start": "./node_modules/.bin/webpack --config webpack.config.js --watch",
     "test-debug": "karma start --browsers Chrome",
