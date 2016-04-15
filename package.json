@@ -1,6 +1,6 @@
 {
   "name": "griddle-overhaul-subgrid-plugin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A plugin for displaying subgrids.",
   "main": "lib/index.js",
   "scripts": {
