@@ -51,6 +51,7 @@
     "webpack-dev-server": "*"
   },
   "dependencies": {
+    "esdoc-es7-plugin": "0.0.3",
     "immutable": "^3.7.2",
     "lodash.assign": "^3.2.0",
     "max-safe-integer": "^1.0.0",
